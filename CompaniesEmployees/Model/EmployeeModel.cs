@@ -9,11 +9,13 @@ namespace CompaniesEmployees.Model
 {
     public class EmployeeModel : BindableBase
     {
+        private readonly ICompanyEmployeeRepository _companyEmployeeRepository;
         private readonly IEmployeeRepository _employeeRepository;
 
         public EmployeeModel(IServiceProvider serviceProvider)
         {
             _employeeRepository = serviceProvider.GetService<IEmployeeRepository>();
+            _companyEmployeeRepository = serviceProvider.GetService<ICompanyEmployeeRepository>();
         }
 
 
@@ -22,9 +24,16 @@ namespace CompaniesEmployees.Model
             return new ObservableCollection<Employee>(_employeeRepository.Get());
         }
 
-        public void AddEmployee(Employee employee)
+        public void AddEmployee(Employee employee, int companyId)
         {
-            _employeeRepository.Add(employee);
+            employee = _employeeRepository.AddAndReturn(employee);
+
+            _companyEmployeeRepository.Add(
+                new CompanyEmployee
+                {
+                    CompanyId = companyId,
+                    EmployeeId = employee.Id
+                });
 
             RaisePropertyChanged("Employees");
         }

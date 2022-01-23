@@ -13,6 +13,8 @@ namespace CE.Data.Base
 
         void Add(T item);
 
+        T AddAndReturn(T item);
+
         void Update(T item);
 
         void Remove(T item);

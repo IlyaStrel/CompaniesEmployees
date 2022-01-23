@@ -19,7 +19,7 @@ namespace CompaniesEmployees.Model
 
         public ObservableCollection<Company> GetCompanies()
         {
-            return new ObservableCollection<Company>(_companyRepository.Get());
+            return new ObservableCollection<Company>(_companyRepository.GetWithRelated());
         }
 
         public void AddCompany(Company company)

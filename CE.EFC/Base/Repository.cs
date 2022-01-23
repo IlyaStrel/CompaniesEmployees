@@ -48,6 +48,14 @@ namespace CE.EFC.Base
             _context.SaveChanges();
         }
 
+        public T AddAndReturn(T entity)
+        {
+            T result = _dbSet.Add(entity).Entity;
+            _context.SaveChanges();
+
+            return result;
+        }
+
         public void Update(T entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
