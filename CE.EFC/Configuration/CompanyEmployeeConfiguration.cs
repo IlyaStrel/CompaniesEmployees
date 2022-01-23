@@ -21,7 +21,7 @@ namespace CE.EFC.Configuration
                    .HasForeignKey(d => d.EmployeeId);
 
             builder.Property(d => d.CompanyId).HasColumnName("CE_COMPANY_ID").IsRequired();
-            builder.Property(d => d.EmployeeId).HasColumnName("CE_EMPLOYE_ID").IsRequired();
+            builder.Property(d => d.EmployeeId).HasColumnName("CE_EMPLOYEE_ID").IsRequired();
         }
     }
 }

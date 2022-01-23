@@ -1,6 +1,7 @@
 ﻿using CE.EFC.Base;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Windows;
 
 namespace CompaniesEmployees
@@ -22,7 +23,7 @@ namespace CompaniesEmployees
         {
             services.AddDbContext<ApplicationContext>(options =>
             {
-                options.UseSqlite("Data Source = CE.db");
+                options.UseSqlite($"Data Source={AppDomain.CurrentDomain.BaseDirectory}/CE.db");
             });
 
             services.RegisterInformationData();
