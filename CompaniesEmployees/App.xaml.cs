@@ -1,6 +1,9 @@
 ﻿using CE.EFC.Base;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using NLog;
+using NLog.Extensions.Logging;
 using System;
 using System.Windows;
 
@@ -12,23 +15,21 @@ namespace CompaniesEmployees
 
         public App()
         {
-            ServiceCollection services = new();
+            var host = new HostBuilder()
+                .ConfigureServices((hostContext, services) =>
+                {
+                    services.AddDbContext<ApplicationContext>(options =>
+                    {
+                        options.UseSqlite($"Data Source={AppDomain.CurrentDomain.BaseDirectory}/CE.db");
+                    });
 
-            ConfigureServices(services);
+                    services.RegisterInformationData();
 
-            _serviceProvider = services.BuildServiceProvider();
-        }
+                    services.AddSingleton<MainWindow>();
 
-        private void ConfigureServices(ServiceCollection services)
-        {
-            services.AddDbContext<ApplicationContext>(options =>
-            {
-                options.UseSqlite($"Data Source={AppDomain.CurrentDomain.BaseDirectory}/CE.db");
-            });
+                    _serviceProvider = services.BuildServiceProvider();
 
-            services.RegisterInformationData();
-
-            services.AddSingleton<MainWindow>();
+                }).Build();
         }
 
         private void OnStartup(object sender, StartupEventArgs e)

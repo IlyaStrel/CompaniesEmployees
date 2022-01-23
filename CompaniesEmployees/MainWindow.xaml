@@ -68,7 +68,13 @@
                 VerticalAlignment="Top" Content="Добавить"
                 Width="80" Margin="5"
                 Command="{Binding AddCompanyCommand}"
-                CommandParameter="{Binding BindingGroupName=companyCard, Path=SelectedCompany}"/>
+                CommandParameter="{Binding BindingGroupName=companyCard, Path=SelectedCompany}">
+                <Button.ToolTip>
+                    <ToolTip>
+                        Для добавления предварительно нажмите "Очистить" и заполните карточку компании
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
 
             <Button Grid.Column="0" Grid.Row="2"
                 HorizontalAlignment="Right"
@@ -76,16 +82,22 @@
                 Width="80" Margin="5"
                 Command="{Binding EditCompanyCommand}"
                 CommandParameter="{Binding BindingGroupName=companyCard, Path=SelectedCompany}"/>
-            
+
             <Button Grid.Column="0" Grid.Row="2" 
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top" Content="Удалить"
                 Width="80" Margin="5"
                 Command="{Binding RemoveCompanyCommand}"
-                CommandParameter="{Binding BindingGroupName=companyList, Path=SelectedCompany.Id}"/>
+                CommandParameter="{Binding BindingGroupName=companyList, Path=SelectedCompany.Id}">
+                <Button.ToolTip>
+                    <ToolTip>
+                        Для удаления предварительно выберите компанию из списка
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
         </StackPanel>
         <!--#endregion-->
-        
+
         <!--#region Employ-->
         <ListBox x:Name="employeeList" 
                  Grid.Column="1" Grid.Row="0" ItemsSource="{Binding Employees}"
@@ -136,7 +148,13 @@
                 VerticalAlignment="Top" Content="Добавить"
                 Width="90" Margin="5"
                 Command="{Binding AddEmployeeCommand}"
-                CommandParameter="{Binding BindingGroupName=employeeCard, Path=SelectedEmployee}"/>
+                CommandParameter="{Binding BindingGroupName=employeeCard, Path=SelectedEmployee}">
+                <Button.ToolTip>
+                    <ToolTip>
+                        Для добавления предварительно нажмите "Очистить" и заполните карточку сотрудника
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
 
             <Button Grid.Column="1" Grid.Row="2"
                 HorizontalAlignment="Right"
@@ -150,7 +168,13 @@
                 VerticalAlignment="Top" Content="Удалить"
                 Width="90" Margin="5"
                 Command="{Binding RemoveEmployeeCommand}"
-                CommandParameter="{Binding BindingGroupName=employeeList, Path=SelectedEmployee.Id}"/>
+                CommandParameter="{Binding BindingGroupName=employeeList, Path=SelectedEmployee.Id}">
+                <Button.ToolTip>
+                    <ToolTip>
+                        Для удаления предварительно выберите сотрудника из списка
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
         </StackPanel>
         <!--#endregion-->
 
