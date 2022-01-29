@@ -6,7 +6,9 @@ namespace CompaniesEmployees
 {
     public partial class MainWindow : Window
     {
-        public MainWindow(IServiceProvider serviceProvider)
+        public MainWindow(
+            IServiceProvider serviceProvider
+            )
         {
             InitializeComponent();
 

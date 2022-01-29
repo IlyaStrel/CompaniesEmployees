@@ -2,8 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using NLog;
-using NLog.Extensions.Logging;
 using System;
 using System.Windows;
 
@@ -24,12 +22,11 @@ namespace CompaniesEmployees
                     });
 
                     services.RegisterInformationData();
-
                     services.AddSingleton<MainWindow>();
 
                     _serviceProvider = services.BuildServiceProvider();
-
-                }).Build();
+                })
+                .Build();
         }
 
         private void OnStartup(object sender, StartupEventArgs e)

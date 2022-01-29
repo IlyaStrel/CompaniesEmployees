@@ -1,5 +1,6 @@
 ﻿using CE.Model;
 using CompaniesEmployees.Model;
+using NLog;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
@@ -16,9 +17,13 @@ namespace CompaniesEmployees.VM
         private readonly EmployeeModel _employeeModel;
         private Employee _employee = new Employee();
         private Company _company = new Company();
+        private ILogger _logger;
 
-        public AppVM(IServiceProvider serviceProvider)
+        public AppVM(
+            IServiceProvider serviceProvider
+            )
         {
+            _logger = LogManager.GetCurrentClassLogger();
             _companyModel = new(serviceProvider);
             _companyModel.PropertyChanged += (s, e) => RaisePropertyChanged(e.PropertyName);
             _employeeModel = new(serviceProvider);
@@ -31,6 +36,8 @@ namespace CompaniesEmployees.VM
 
                     SelectedCompany = new Company();
                     SelectedEmployee = new Employee();
+
+                    _logger.Info("Clear is true!");
                 });
 
             AddCompanyCommand = new DelegateCommand<Company>(
@@ -39,6 +46,8 @@ namespace CompaniesEmployees.VM
                     if (!string.IsNullOrEmpty(company?.Name))
                     {
                         _companyModel.AddCompany(company);
+
+                        _logger.Info("Adding is true!");
                     }
                 });
 
@@ -51,6 +60,8 @@ namespace CompaniesEmployees.VM
 
                         SelectedCompany = new Company();
                         SelectedEmployee = new Employee();
+
+                        _logger.Info("Removing is true!");
                     }
                 });
 
@@ -60,6 +71,8 @@ namespace CompaniesEmployees.VM
                     if (!string.IsNullOrEmpty(company.Name))
                     {
                         _companyModel.EditCompany(company);
+
+                        _logger.Info("Editing is true!");
                     }
                 });
 
